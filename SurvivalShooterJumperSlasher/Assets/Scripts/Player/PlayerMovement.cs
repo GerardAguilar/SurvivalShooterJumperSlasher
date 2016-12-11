@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         Move(h, v);
         Turning();
         Animating(h, v);
+        
 
     }
 
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         movement.Set(h, 0f, v);
         movement = movement.normalized * speed * Time.deltaTime;//keeps diagonal movement the same length as horizontal and vertical
         playerRigidbody.MovePosition(transform.position + movement);
+        
     }
 
     void Turning() {
@@ -48,8 +50,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Animating(float h, float v) {
-        bool walking = h!= 0f || v != 0f;//senses movement in the horizontal or the vertical
+        bool walking = h != 0f || v != 0f;//senses movement in the horizontal or the vertical
         anim.SetBool("IsWalking", walking);
         //issues with animating. 09DEC2016 8:55am
+        if (walking)
+        {
+            anim.SetFloat("Speed", 1);
+        }
+        else {
+            anim.SetFloat("Speed", 0);
+        }
+        
     }
 }
