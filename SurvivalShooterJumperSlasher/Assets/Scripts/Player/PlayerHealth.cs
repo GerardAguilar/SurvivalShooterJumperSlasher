@@ -30,6 +30,8 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent <PlayerMovement> ();
         //playerShooting = GetComponentInChildren <PlayerShooting> ();
         currentHealth = startingHealth;
+        healthSlider = (Slider)(Object)GameObject.Find("HealthSlider");
+        //12:33 16DEC2016 Trying to dynamically assign variables.
     }
 
 
