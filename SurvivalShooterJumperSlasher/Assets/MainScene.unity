@@ -502,7 +502,7 @@ MonoBehaviour:
   damageImage: {fileID: 0}
   deathClip: {fileID: 0}
   flashSpeed: 5
-  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
+  flashColour: {r: 1, g: 0, b: 0, a: 0.253}
 --- !u!1 &1192891011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,6 +1339,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f6618a0da65fa45b24d5105d5d8422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2123227755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2123227746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15099f5ee559584089d5851df572def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenAttacks: 0.5
+  attackDamage: 10
 --- !u!1 &2130853532
 GameObject:
   m_ObjectHideFlags: 0
