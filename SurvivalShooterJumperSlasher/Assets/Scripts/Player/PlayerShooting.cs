@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CompleteProject;
+using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -74,8 +75,8 @@ public class PlayerShooting : MonoBehaviour
         //if you don't hit anything, just draw a really long line
         //shootHit is what we hit
         {
-            EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
-            if(enemyHealth != null)
+            EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage (damagePerShot, shootHit.point);
             }

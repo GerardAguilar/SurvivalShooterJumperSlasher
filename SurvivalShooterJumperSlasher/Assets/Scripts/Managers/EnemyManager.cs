@@ -10,7 +10,9 @@ public class EnemyManager : MonoBehaviour
 
     void Start ()
     {
-        InvokeRepeating ("Spawn", spawnTime, spawnTime);
+        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        //enemy = (GameObject)Resources.Load("Zombunny");//Resources folder needs to be created for this to work
+        InvokeRepeating ("Spawn", spawnTime, spawnTime);//function name, initial breathing room, interval
     }
 
 
