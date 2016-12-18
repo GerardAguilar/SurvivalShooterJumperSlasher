@@ -23,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio = GetComponent <AudioSource> ();
         hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
+        deathClip = (AudioClip)Resources.Load("DeathClip");
 
         currentHealth = startingHealth;
     }
@@ -32,7 +33,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if(isSinking)
         {
-            transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
+            transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);//Translate moves the transform
         }
     }
 
@@ -60,7 +61,7 @@ public class EnemyHealth : MonoBehaviour
     {
         isDead = true;
 
-        capsuleCollider.isTrigger = true;
+        capsuleCollider.isTrigger = true;//Makes enemy no longer interactable (ie. can walk through)
 
         anim.SetTrigger ("Dead");
 
@@ -71,10 +72,10 @@ public class EnemyHealth : MonoBehaviour
 
     public void StartSinking ()
     {
-        GetComponent <NavMeshAgent> ().enabled = false;
-        GetComponent <Rigidbody> ().isKinematic = true;
+        GetComponent <NavMeshAgent> ().enabled = false;//No longer moving towards you. Active is for GameObjects, Enabled is for Components of GameObjects
+        GetComponent <Rigidbody> ().isKinematic = true;//When you move a collider, Unity tries to recalculate all the static geometry since the level has "changed." With kinematics, Unity ignores it.
         isSinking = true;
         //ScoreManager.score += scoreValue;
-        Destroy (gameObject, 2f);
+        Destroy (gameObject, 2f);//2f is the length of time
     }
 }

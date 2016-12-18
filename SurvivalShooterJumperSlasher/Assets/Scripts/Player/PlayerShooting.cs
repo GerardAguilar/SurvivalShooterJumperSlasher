@@ -63,23 +63,27 @@ public class PlayerShooting : MonoBehaviour
         gunParticles.Play ();
 
         gunLine.enabled = true;
-        gunLine.SetPosition (0, transform.position);
+        gunLine.SetPosition (0, transform.position);//first point of the line
 
         shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
+        shootRay.direction = transform.forward;//away from the user, local forward of the tip of the gun
 
-        if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
+        //This bottom one we should take the time to understand
+        if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))//calculate the second point for our line
+        //if you hit something, disappear
+        //if you don't hit anything, just draw a really long line
+        //shootHit is what we hit
         {
             EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
             if(enemyHealth != null)
             {
                 enemyHealth.TakeDamage (damagePerShot, shootHit.point);
             }
-            gunLine.SetPosition (1, shootHit.point);
+            gunLine.SetPosition (1, shootHit.point);//ends the line
         }
         else
         {
-            gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
+            gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);//the "if we don't hit anything"
         }
     }
 }

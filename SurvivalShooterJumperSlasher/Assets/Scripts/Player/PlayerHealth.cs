@@ -18,22 +18,25 @@ public class PlayerHealth : MonoBehaviour
     Animator anim;
     AudioSource playerAudio;
     PlayerMovement playerMovement;
-    //PlayerShooting playerShooting;
+    PlayerShooting playerShooting;
     bool isDead;
     bool damaged;
 
+    string deathClipStr;
 
     void Awake ()
     {
         anim = GetComponent <Animator> ();
         playerAudio = GetComponent <AudioSource> ();
         playerMovement = GetComponent <PlayerMovement> ();
-        //playerShooting = GetComponentInChildren <PlayerShooting> ();
+        playerShooting = GetComponentInChildren<PlayerShooting>();
         currentHealth = startingHealth;
         healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
         damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
-        deathClip = (AudioClip)Resources.Load("Player Death");
-        //12:33 16DEC2016 Trying to dynamically assign variables.
+        //deathClipStr = "Player Death";
+        //deathClip = (AudioClip)Resources.Load(deathClipStr);
+        //12:33AM 16DEC2016 Trying to dynamically assign variables. 
+        //8:57AM 18DEC2016AudioClip with space in name doesn't work. Maybe it's the Resource Folder thing
     }
 
 
@@ -72,7 +75,7 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
-        //playerShooting.DisableEffects ();
+        playerShooting.DisableEffects();
 
         anim.SetTrigger ("Die");
 
@@ -80,7 +83,7 @@ public class PlayerHealth : MonoBehaviour
         playerAudio.Play ();
 
         playerMovement.enabled = false;
-        //playerShooting.enabled = false;
+        playerShooting.enabled = false;
     }
 
 
