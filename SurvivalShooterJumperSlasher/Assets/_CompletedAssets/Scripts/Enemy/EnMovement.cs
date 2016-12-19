@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace CompleteProject
 {
-    public class EnemyMovement : MonoBehaviour
+    public class EnMovement : MonoBehaviour
     {
         Transform player;               // Reference to the player's position.
         PlayerHealth playerHealth;      // Reference to the player's health.
@@ -24,11 +24,11 @@ namespace CompleteProject
         void Update ()
         {
             // If the enemy and the player have health left...
-            if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+            if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
             {
                 // ... set the destination of the nav mesh agent to the player.
                 nav.SetDestination (player.position);
-            }
+        }
             // Otherwise...
             else
             {
