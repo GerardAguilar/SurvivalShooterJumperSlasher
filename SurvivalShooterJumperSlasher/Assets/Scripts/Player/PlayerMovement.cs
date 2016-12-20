@@ -3,28 +3,46 @@
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 6f;
+    public float jumpStrength = 10f;
+    public bool isFalling;
 
     Vector3 movement;
     Animator anim;
     Rigidbody playerRigidbody;
     int floorMask;
     float camRayLength = 100f;
+    
 
     void Awake() {
         floorMask = LayerMask.GetMask("Floor");
         anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
+        isFalling = false;
+    }
+
+    void Update() {
+        if (Input.GetButton("Jump") && isFalling == false)
+        {
+            isFalling = true;
+            Debug.Log("Jump");
+            Vector3 jump = new Vector3(0.0f, 10.0f, 0.0f);
+            jump.Normalize();
+            //playerRigidbody.AddForce(jump * jumpStrength);
+            playerRigidbody.AddForce(0, 5, 0, ForceMode.Impulse);
+        }
     }
 
     void FixedUpdate() {
         float h = Input.GetAxisRaw("Horizontal"); //just -1,0,1 instead of -1...-0.5...0...0.5...1
         float v = Input.GetAxisRaw("Vertical");
 
-        Move(h, v);
-        Turning();
-        Animating(h, v);
+        //if (!isFalling)
+        //{
+            Move(h, v);
+            Turning();
+            Animating(h, v);
+        //}
         
-
     }
 
     void Move(float h, float v) {

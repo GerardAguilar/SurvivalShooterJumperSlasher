@@ -348,6 +348,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
+--- !u!1 &264212720 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011822354154, guid: 31323dec284579a4c962482cd9c35051,
+    type: 2}
+  m_PrefabInternal: {fileID: 1190657375}
+--- !u!135 &264212728
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 264212720}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &518907670
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +868,7 @@ GameObject:
   - 4: {fileID: 1192891014}
   - 33: {fileID: 1192891013}
   - 64: {fileID: 1192891012}
+  - 114: {fileID: 1192891015}
   m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
@@ -890,6 +908,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &1192891015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1192891011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a8cb9aac5d52545a78b420272db6d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1229538906
 GameObject:
   m_ObjectHideFlags: 0
