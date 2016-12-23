@@ -46,12 +46,12 @@ public class PlayerMovement : MonoBehaviour
 
         //Jump method 1 = add force, free movement when up in the air
         //jumping should be based on where you're facing. Currently, the bottom feels too floaty.
-        //if (Input.GetButton("Jump") && isFalling == false)
-        //{
-        //    isFalling = true;
-        //    Debug.Log("Jump");
-        //    playerRigidbody.AddForce(0, 1, 0, ForceMode.Impulse);
-        //}
+        if (Input.GetButton("Jump") && isFalling == false)
+        {
+            isFalling = true;
+            Debug.Log("Jump");
+            playerRigidbody.AddForce(0, 1, 0, ForceMode.Impulse);
+        }
 
         //Jump method 2 - is not working. 
         //Attempting to extrapolate x and z coordinates based on player y rotation
@@ -102,10 +102,10 @@ public class PlayerMovement : MonoBehaviour
         //Jump method4 - translate y rotation to x and z values
         //z is up and down, x is right and left
         //modify public x, y, z in Unity
-        if (Input.GetButton("Jump") && isFalling == false)
-        {
-            playerRigidbody.AddForce(x, y, z, ForceMode.Impulse);
-        }
+        //if (Input.GetButton("Jump") && isFalling == false)
+        //{
+        //    playerRigidbody.AddForce(x, y, z, ForceMode.Impulse);
+        //}
     }
 
     void Move(float h, float v) {
