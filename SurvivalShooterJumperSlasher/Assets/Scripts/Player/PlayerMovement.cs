@@ -5,31 +5,32 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 6f;
     public float jumpStrength = 10f;
     public bool isFalling;
+    public float x;
+    public float y;
+    public float z;
+    public Vector3 jumpMove = new Vector3();
+    public Vector3 jumpMove2 = new Vector3();
 
     Vector3 movement;
     Animator anim;
     Rigidbody playerRigidbody;
+    Transform playerTransform;
     int floorMask;
     float camRayLength = 100f;
+    
     
 
     void Awake() {
         floorMask = LayerMask.GetMask("Floor");
         anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
+        playerTransform = GetComponent<Transform>();
         isFalling = false;
     }
 
     void Update() {
-        if (Input.GetButton("Jump") && isFalling == false)
-        {
-            isFalling = true;
-            Debug.Log("Jump");
-            Vector3 jump = new Vector3(0.0f, 10.0f, 0.0f);
-            jump.Normalize();
-            //playerRigidbody.AddForce(jump * jumpStrength);
-            playerRigidbody.AddForce(0, 5, 0, ForceMode.Impulse);
-        }
+        //moved jump functionality to FixedUpdate()
+        
     }
 
     void FixedUpdate() {
@@ -42,7 +43,69 @@ public class PlayerMovement : MonoBehaviour
             Turning();
             Animating(h, v);
         //}
-        
+
+        //Jump method 1 = add force, free movement when up in the air
+        //jumping should be based on where you're facing. Currently, the bottom feels too floaty.
+        //if (Input.GetButton("Jump") && isFalling == false)
+        //{
+        //    isFalling = true;
+        //    Debug.Log("Jump");
+        //    playerRigidbody.AddForce(0, 1, 0, ForceMode.Impulse);
+        //}
+
+        //Jump method 2 - is not working. 
+        //Attempting to extrapolate x and z coordinates based on player y rotation
+        //Maybe it's with MovePosition
+        //if (Input.GetButton("Jump") && isFalling == false)
+        //{
+        //    isFalling = true;
+        //    Debug.Log("Jump2");
+        //    //now how to calculate based on angle
+        //    //x = specific width of camera view
+        //    //y = height of jump
+        //    //z = specific height of camera view
+
+        //    if (playerTransform.localRotation.y < 0) {
+        //        x = 2f * Mathf.Tan(playerTransform.localRotation.y);
+        //        //x = 5f;
+        //        y = 3f;
+        //        //z = 5f;
+        //        z = 2f * Mathf.Sin(playerTransform.localRotation.y);
+        //    }
+        //    else{
+        //        x = -2f * Mathf.Tan(playerTransform.localRotation.y);
+        //        y = 3f;
+        //        z = -2f * Mathf.Sin(playerTransform.localRotation.y);
+        //    }
+
+
+
+        //    jumpMove.Set(x, y, z);
+        //    //jumpMove = jumpMove.normalized;
+        //    playerRigidbody.MovePosition(transform.position + jumpMove);
+
+
+        //}
+
+        //Jump is complicated. Jump towards facing or moving?
+
+        //Jump method3 - generate a vector by quaternion
+        //if (Input.GetButton("Jump") && isFalling == false)
+        //{
+        //    isFalling = true;
+        //    Quaternion rot = Quaternion.AngleAxis(playerTransform.rotation.y, Vector3.up);
+        //    Vector3 forward = Vector3.forward;
+        //    jumpMove2 = rot * forward;
+        //    playerRigidbody.AddForce(x, y, z, ForceMode.Impulse);
+        //}
+
+        //Jump method4 - translate y rotation to x and z values
+        //z is up and down, x is right and left
+        //modify public x, y, z in Unity
+        if (Input.GetButton("Jump") && isFalling == false)
+        {
+            playerRigidbody.AddForce(x, y, z, ForceMode.Impulse);
+        }
     }
 
     void Move(float h, float v) {

@@ -9,7 +9,7 @@ public class FloorScript : MonoBehaviour {
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerStay(Collider other) {
         if (other.CompareTag("Player")) {
             Debug.Log("Player has touched the floor!");
             playerMovement.isFalling = false;
