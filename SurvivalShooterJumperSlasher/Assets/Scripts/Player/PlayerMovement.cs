@@ -10,6 +10,11 @@ public class PlayerMovement : MonoBehaviour
     public float z;
     public Vector3 jumpMove = new Vector3();
     public Vector3 jumpMove2 = new Vector3();
+    public float horizontalThrust;
+    public float verticalThrust;
+    public float thrust;
+    public float downAccel = 0.75f;
+    public Vector3 pVelocity = new Vector3();
 
     Vector3 movement;
     Animator anim;
@@ -36,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate() {
         float h = Input.GetAxisRaw("Horizontal"); //just -1,0,1 instead of -1...-0.5...0...0.5...1
         float v = Input.GetAxisRaw("Vertical");
+        float jumpInput = Input.GetAxisRaw("Jump");
 
         //if (!isFalling)
         //{
@@ -46,11 +52,26 @@ public class PlayerMovement : MonoBehaviour
 
         //Jump method 1 = add force, free movement when up in the air
         //jumping should be based on where you're facing. Currently, the bottom feels too floaty.
-        if (Input.GetButton("Jump") && isFalling == false)
+        if (jumpInput>0 && isFalling == false)
         {
             isFalling = true;
             Debug.Log("Jump");
-            playerRigidbody.AddForce(0, 1, 0, ForceMode.Impulse);
+            //playerRigidbody.AddForce(0, 1, 0, ForceMode.Impulse);
+            //playerRigidbody.AddRelativeForce(new Vector3(0f, 1f, 1f) * thrust);
+            //playerRigidbody.AddRelativeForce(Vector3.forward * horizontalThrust);
+            pVelocity.y = 10f;
+            playerRigidbody.velocity = pVelocity;
+
+        }
+        else if (jumpInput == 0 && isFalling == false)
+        {
+            pVelocity.y = 0f;
+            playerRigidbody.velocity = pVelocity;
+        }
+        else {
+            Debug.Log("downAccel");
+            pVelocity.y -= downAccel;
+            playerRigidbody.velocity = pVelocity;
         }
 
         //Jump method 2 - is not working. 

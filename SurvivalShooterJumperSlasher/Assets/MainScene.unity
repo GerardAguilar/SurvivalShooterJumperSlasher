@@ -1034,6 +1034,21 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 54000010130163134, guid: 31323dec284579a4c962482cd9c35051,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54000010130163134, guid: 31323dec284579a4c962482cd9c35051,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014131714526, guid: 31323dec284579a4c962482cd9c35051,
+        type: 2}
+      propertyPath: thrust
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 31323dec284579a4c962482cd9c35051, type: 2}
   m_IsPrefabParent: 0
