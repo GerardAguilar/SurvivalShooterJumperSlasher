@@ -9,6 +9,8 @@ public class Revolve : MonoBehaviour {
 
     
     public Transform focus;
+    public Quaternion playerRotation;
+    public BladePool bladePool;
 
     float acceleration;
     float speed;
@@ -16,13 +18,19 @@ public class Revolve : MonoBehaviour {
     Vector3 originalPosition;
 
     void Start() {
-        focus = GameObject.Find("Player").transform;
+        //focus = GameObject.Find("Player").transform;
+        //bladePool = GameObject.Find("BladePool").GetComponent<BladePool>();
+        
+        
     }
 
     void OnEnable() {
+        focus = GameObject.Find("Player").transform;
         acceleration = 1;
         speed = 200;
-        originalRotation = transform.rotation;
+        //originalRotation = transform.rotation;
+        transform.localRotation = Quaternion.Euler(focus.rotation.x, focus.rotation.y-30f, focus.rotation.z);
+
         originalPosition = transform.localPosition;
     }
 
@@ -41,8 +49,9 @@ public class Revolve : MonoBehaviour {
     void OnDisable() {//this offset should be based on the character's current rotation
         //Resetting on disable might not be a good idea. The reset should be on Enable
         //What to do with the initial run?
-        transform.rotation = originalRotation;
+        //transform.rotation = playerRotation;
         transform.localPosition = originalPosition;
+        
     }
 
 }

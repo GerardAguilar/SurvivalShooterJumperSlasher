@@ -9,6 +9,10 @@ public class BladePool : MonoBehaviour {
     public List<GameObject> bladeArray;
     public GameObject bladePool;
     public Transform bladeSpawn;
+    public Transform playerTransform;
+    public float nextFire;
+    public float fireRate;
+
 
     int stepper;
 
@@ -20,12 +24,19 @@ public class BladePool : MonoBehaviour {
         bladePool = GameObject.Find("BladePool");
         stepper = 0;
 
+        fireRate = 1f;
+        nextFire = 0f;
+
         GameObject temp;
         for (int i = 0; i < bladeCount; i++)
         {
 
             temp = (GameObject)Instantiate(
-                    blade, bladePool.transform.position, new Quaternion(0f,0f,0f,0f)
+                    blade, 
+                    new Vector3 (bladePool.transform.position.x, 
+                                bladePool.transform.position.y+.35f, 
+                                bladePool.transform.position.z+.5f), 
+                    new Quaternion(0f,0f,0f,0f)
                 );
             temp.transform.SetParent(bladePool.transform);
             temp.SetActive(false);
@@ -34,8 +45,16 @@ public class BladePool : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if (Input.GetButton("Fire2")) {
+        if (Input.GetButton("Fire2") && Time.time > nextFire) {
+            nextFire = Time.time + fireRate;
             SwingBlade();
+        }
+    }
+
+    public void UpdateRotation() {
+        playerTransform = GameObject.Find("Player").transform;
+        for (int i = 0; i < bladeCount; i++) {
+            bladeArray[i].transform.rotation = playerTransform.rotation;
         }
     }
 
