@@ -7,7 +7,6 @@ using System.Collections;
 
 public class Revolve : MonoBehaviour {
 
-    
     public Transform focus;
     public Quaternion playerRotation;
     public BladePool bladePool;
@@ -17,10 +16,14 @@ public class Revolve : MonoBehaviour {
     Quaternion originalRotation;
     Vector3 originalPosition;
 
+    public GameObject target;
+    public EnemyHealth test;
+    public int damagePerSlash;
+
     void Start() {
         //focus = GameObject.Find("Player").transform;
         //bladePool = GameObject.Find("BladePool").GetComponent<BladePool>();
-        
+        damagePerSlash = 1000;
         
     }
 
@@ -34,8 +37,22 @@ public class Revolve : MonoBehaviour {
         originalPosition = transform.localPosition;
     }
 
-	// Use this for initialization
-	void FixedUpdate () {
+    //void OnCollisionEnter(Collision other)
+    //{
+    //    Debug.Log("hi");
+        //Debug.Log(other.gameObject);
+        //if (other.gameObject.CompareTag("Enemy"))
+        //{
+        //    target = other.gameObject;
+        //    test = target.GetComponent<EnemyHealth>();
+        //    test.TakeDamage(damagePerSlash, target.transform.position);
+        //    Debug.Log(target.tag);
+
+        //}
+    //}
+
+    // Use this for initialization
+    void FixedUpdate () {
         transform.RotateAround(new Vector3(focus.position.x, focus.position.y, focus.position.z), focus.up, speed*acceleration*Time.deltaTime);
         if (acceleration > 9)
         {

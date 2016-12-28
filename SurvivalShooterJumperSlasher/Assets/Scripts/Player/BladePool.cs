@@ -12,8 +12,6 @@ public class BladePool : MonoBehaviour {
     public Transform playerTransform;
     public float nextFire;
     public float fireRate;
-
-
     int stepper;
 
     // Use this for initialization
@@ -39,7 +37,7 @@ public class BladePool : MonoBehaviour {
                     new Quaternion(0f,0f,0f,0f)
                 );
             temp.transform.SetParent(bladePool.transform);
-            temp.SetActive(false);
+            //temp.SetActive(false);
             bladeArray.Add(temp);
         }
     }
