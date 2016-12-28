@@ -15,13 +15,15 @@ public class PlayerMovement : MonoBehaviour
     public float thrust;
     public float downAccel = 0.75f;
     public Vector3 pVelocity = new Vector3();
+    public float rotationSpeed = 100f;
+
 
     Vector3 movement;
     Animator anim;
     Rigidbody playerRigidbody;
     Transform playerTransform;
     int floorMask;
-    float camRayLength = 100f;
+    float camRayLength = 1000f;
     
     
 
@@ -45,9 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
         //if (!isFalling)
         //{
-            Move(h, v);
-            Turning();
-            Animating(h, v);
+        Move(h, v);
+        //Turning();
+        Animating(h, v);
         //}
 
         //Jump method 1 = add force, free movement when up in the air
@@ -134,6 +136,16 @@ public class PlayerMovement : MonoBehaviour
         movement = movement.normalized * speed * Time.deltaTime;//keeps diagonal movement the same length as horizontal and vertical
         playerRigidbody.MovePosition(transform.position + movement);
         
+        if (movement != Vector3.zero)
+        {
+            playerRigidbody.rotation = Quaternion.LookRotation(movement);
+            //    transform.rotation = Quaternion.Slerp(
+            //        transform.rotation,
+            //        Quaternion.LookRotation(movement),
+            //        Time.deltaTime * rotationSpeed
+            //    );
+        }
+
     }
 
     void Turning() {
