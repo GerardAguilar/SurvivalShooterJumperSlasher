@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         //if (!isFalling)
         //{
         Move(h, v);
-        //Turning();
+        Turning();
         Animating(h, v);
         //}
 
